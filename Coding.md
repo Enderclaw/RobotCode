@@ -13,8 +13,7 @@
 ```css
 // This code is for the VEX cortex platform
 #pragma platform(VEX2)
-```
-```css
+
 // Select Download method as "competition"
 #pragma competitionControl(Competition)
 
