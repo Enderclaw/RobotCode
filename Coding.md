@@ -5,7 +5,6 @@
 #pragma config(Motor,  port4,           LLB,           tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port5,           RLT,           tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port6,           RLB,           tmotorVex393_MC29, openLoop, reversed)
-#pragma config(Motor,  port7,           Claw,          tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port8,           Lift3,         tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port9,           FDR2,          tmotorVex393_MC29, openLoop, reversed, driveRight)
 #pragma config(Motor,  port10,          FDR,           tmotorVex393_HBridge, openLoop, reversed, driveRight)
@@ -47,7 +46,7 @@ task autonomous()
 	motor[RLT] = 127;
 	motor[RLB] = 127;
 	motor[Lift3] = 127;
-	wait1Msec(10000);
+	wait1Msec(1000);
 
 	motor[LLT] = 0; //Stop lift
 	motor[LLB] = 0;
@@ -55,13 +54,6 @@ task autonomous()
 	motor[RLB] = 0;
 	motor[Lift3] = 0;
 	wait1Msec(1000);
-
-	motor[Claw] = -127; //open claw
-	wait1Msec(2500);
-
-	motor[Claw] = 0;
-	wait1Msec(2500);
-
 }
 ```
 ```css
@@ -102,20 +94,6 @@ task usercontrol()
 			motor[Lift3] = 0;
 		}
 
-		if(vexRT[Btn6U] == 1)
-		{
-			motor[Claw] = 127;
-		}
-
-		else if(vexRT[Btn6D] == 1)
-		{
-			motor[Claw] = -127;
-		}
-
-		else
-		{
-			motor[Claw] = 0;
-		}
 	}
 }
 ```
