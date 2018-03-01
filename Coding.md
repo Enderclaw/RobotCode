@@ -1,3 +1,4 @@
+```css
 #pragma config(Motor,  port1,           FDL,           tmotorVex393_HBridge, openLoop, driveLeft)
 #pragma config(Motor,  port2,           BDL,           tmotorVex393_MC29, openLoop, reversed, driveLeft)
 #pragma config(Motor,  port3,           LLT,           tmotorVex393_MC29, openLoop)
@@ -18,7 +19,8 @@
 
 //Main competition background code...do not modify!
 #include "Vex_Competition_Includes.c"
-
+```
+```css
 void pre_auton()
 {
 	bStopTasksBetweenModes = true;
@@ -58,7 +60,8 @@ task autonomous()
 	motor[Claw] = 0;
 	wait1Msec(1000);
 }
-
+```
+```css
 task usercontrol()
 {
 	while (true)
@@ -112,3 +115,4 @@ task usercontrol()
 		}
 	}
 }
+```
