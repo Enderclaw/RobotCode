@@ -1,5 +1,6 @@
 ```css
 #pragma config(Sensor, dgtl1,  AutonInd,       sensorLEDtoVCC)
+#pragma config(Sensor, dgtl2,  tog,            sensorTouch)
 #pragma config(Motor,  port1,           FDL,           tmotorVex393_HBridge, openLoop, reversed, driveLeft)
 #pragma config(Motor,  port2,           BDL,           tmotorVex393_MC29, openLoop, reversed, driveLeft)
 #pragma config(Motor,  port3,           LLF,           tmotorVex393_MC29, openLoop)
@@ -15,9 +16,10 @@
 #pragma platform(VEX2)
 #pragma competitionControl(Competition)
 #include "Vex_Competition_Includes.c"
+
 void pre_auton()
 {
-	bStopTasksBetweenModes = true;
+	
 }
 
 task autonomous()
@@ -100,6 +102,7 @@ task usercontrol()
 {
 	while (true)
 	{
+		SensorValue[AutonInd] = vexRT[Btn8D];
 		motor[FDL] = vexRT[Ch3];
 		motor[BDL] = vexRT[Ch3];
 		motor[NDL] = vexRT[Ch3];
