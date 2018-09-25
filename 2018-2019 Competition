@@ -1,3 +1,0 @@
-#include "robot-config.h"
-vex::rotationUnits rotations = vex::rotationUnits::rev;
-int main () {
