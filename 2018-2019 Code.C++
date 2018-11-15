@@ -1,6 +1,6 @@
 #include "robot-config.h"
 vex::rotationUnits rotations = vex::rotationUnits::rev;
-//
+
 int main() {
 	int howMany = 2; //move forward
 	LeftMotor.startRotateFor(howMany, rotations);
@@ -22,4 +22,7 @@ int main() {
 	
 	LeftMotor.startRotateFor(2 * revsPerClawbot90Turn, revolutions); //right turn
 	RightMotor.rotateFor(-2 * revsPerClawbot90Turn, revolutions);
+	
+	while(true) {
+	ClawMotor.spin(reverse)
 }
