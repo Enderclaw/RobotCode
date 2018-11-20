@@ -1,35 +1,50 @@
 int main() {
 
 	while(true) { //Tank Control
-		LeftMotor.spin(vex::directionType::fwd, Controller1.Axis3.value(), vex::velocityUnits::pct);  //(Axis3+Axis4)/2
-		RightMotor.spin(vex::directionType::fwd, Controller1.Axis2.value(), vex::velocityUnits::pct); //(Axis3-Axis4)/2
+		LeftDrive.spin(vex::directionType::fwd, Controller1.Axis3.value(), vex::velocityUnits::pct);  //(Axis3+Axis4)/2
+		RightDrive.spin(vex::directionType::fwd, Controller1.Axis2.value(), vex::velocityUnits::pct); //(Axis3-Axis4)/2
 		vex::task::sleep(20); 
     }
 	
 //Use these variables to set the speed of the arm and claw.
-	int armSpeedPCT = 50;
-	int clawSpeedPCT = 50;
+	int LiftSpeedPCT = 50;
+	int CapSpeedPCT = 50;
+	int FlySpeedPCT = 100;
 
 	while(true) { //Claw Control
-		if(Controller1.ButtonUp.pressing()) {
-			ArmMotor.spin(directionType::fwd, armSpeedPCT, velocityUnits::pct);
+		if(Controller1.ButtonL1.pressing()) {
+			LeftLift.spin(directionType::fwd, LiftSpeedPCT, velocityUnits::pct);
+			RightLift.spin(directionType::fwd, LiftSpeedPCT, velocityUnits::pct);
 		}
-		else if(Controller1.ButtonDown.pressing()) {
-			ArmMotor.spin(directionType::rev, armSpeedPCT, velocityUnits::pct);
+		else if(Controller1.ButtonL2.pressing()) {
+			LeftLift.spin(directionType::rev, LiftSpeedPCT, velocityUnits::pct);
+			RightLift.spin(directionType::rev, LiftSpeedPCT, velocityUnits::pct);
 		}
 		else {
-			ArmMotor.stop(brakeType::brake);
+			LeftLift.stop(brakeType::brake);
+			RightLift.stop(brakeType::brake);
+		}
+		
+		if(Controller1.ButtonR1.pressing()) { //Cap Control
+			CapMotor.spin(directionType::fwd, CapSpeedPCT, velocityUnits::pct);
+		}
+		else if(Controller1.ButtonR2.pressing()) {
+			CapMotor.spin(directionType::rev, CapSpeedPCT, velocityUnits::pct);
+		}
+		else {
+			CapMotor.stop(brakeType::brake);
 		}
 		
 		if(Controller1.ButtonA.pressing()) {
-			ClawMotor.spin(directionType::fwd, clawSpeedPCT, velocityUnits::pct);
+			FlyMotor.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
 		}
-		else if(Controller1.ButtonY.pressing()) {
-			ClawMotor.spin(directionType::rev, clawSpeedPCT, velocityUnits::pct);
+		if(Controller1.ButtonY.pressing()) {
+			FlyMotor.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
 		}
 		else {
-			ClawMotor.stop(brakeType::brake);
-		}
+			FlyMotor.stop(brakeType::brake);
+			
+			
 
         task::sleep(20);
     }
