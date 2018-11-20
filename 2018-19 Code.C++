@@ -3,8 +3,8 @@ int main() {
 	while(true) { //Tank Control
 		LeftDrive.spin(vex::directionType::fwd, Controller1.Axis3.value(), vex::velocityUnits::pct);  //(Axis3+Axis4)/2
 		RightDrive.spin(vex::directionType::fwd, Controller1.Axis2.value(), vex::velocityUnits::pct); //(Axis3-Axis4)/2
-		vex::task::sleep(20); 
-    }
+		vex::task::sleep(200); 
+	}
 	
 //Use these variables to set the speed of the arm and claw.
 	int LiftSpeedPCT = 50;
@@ -26,26 +26,30 @@ int main() {
 		}
 		
 		if(Controller1.ButtonR1.pressing()) { //Cap Control
-			CapMotor.spin(directionType::fwd, CapSpeedPCT, velocityUnits::pct);
+			CapFlip.spin(directionType::fwd, CapSpeedPCT, velocityUnits::pct);
 		}
 		else if(Controller1.ButtonR2.pressing()) {
-			CapMotor.spin(directionType::rev, CapSpeedPCT, velocityUnits::pct);
+			CapFlip.spin(directionType::rev, CapSpeedPCT, velocityUnits::pct);
 		}
 		else {
-			CapMotor.stop(brakeType::brake);
+			CapFlip.stop(brakeType::brake);
 		}
 		
 		if(Controller1.ButtonA.pressing()) {
-			FlyMotor.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
+			LeftFly.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
+			RightFly.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
 		}
 		if(Controller1.ButtonY.pressing()) {
-			FlyMotor.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
+			LeftFly.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
+			RightFly.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
 		}
 		else {
-			FlyMotor.stop(brakeType::brake);
+			LeftFly.stop(brakeType::brake);
+			RightFLy.stop(brakeType::brake);
+		}
 			
 			
 
-        task::sleep(20);
+        task::sleep(200);
     }
 }
