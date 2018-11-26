@@ -48,7 +48,16 @@ int main() {
 			RightFLy.stop(brakeType::brake);
 		}
 			
+		if(Controller1.ButtonUp.pressing()) {
+			BallIntake.spin(directionType::fwd, CapSpeedPCT, velocityUnits::pct);
+		}
 			
+		else if(Controller1.ButtonDown.pressing()) {
+			BallIntake.spin(directionType::rev, CapSpeedPCT, velocityUnits::pct);
+		}
+		else {
+			BallIntake.stop(brakeType::brake);
+		}
 
         task::sleep(200);
     }
