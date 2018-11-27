@@ -1,4 +1,3 @@
-
 int main() {
 
 	while(true) { //Tank Control
@@ -58,8 +57,7 @@ int main() {
 		else {
 			BallIntake.stop(brakeType::brake);
 		}
-
-		
+	
         task::sleep(200);
     }
 }
