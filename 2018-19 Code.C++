@@ -11,8 +11,8 @@ int main() {
 	int CapSpeedPCT = 50;
 	int FlySpeedPCT = 100;
 
-	while(true) { //Claw Control
-		if(Controller1.ButtonL1.pressing()) {
+	while(true) { 
+		if(Controller1.ButtonL1.pressing()) { //Lift
 			LeftLift.spin(directionType::fwd, LiftSpeedPCT, velocityUnits::pct);
 			RightLift.spin(directionType::fwd, LiftSpeedPCT, velocityUnits::pct);
 		}
@@ -25,7 +25,7 @@ int main() {
 			RightLift.stop(brakeType::brake);
 		}
 		
-		if(Controller1.ButtonR1.pressing()) { //Cap Control
+		if(Controller1.ButtonR1.pressing()) { //Cap flip
 			CapFlip.spin(directionType::fwd, CapSpeedPCT, velocityUnits::pct);
 		}
 		else if(Controller1.ButtonR2.pressing()) {
@@ -35,7 +35,7 @@ int main() {
 			CapFlip.stop(brakeType::brake);
 		}
 		
-		if(Controller1.ButtonA.pressing()) {
+		if(Controller1.ButtonA.pressing()) { //Flywheel
 			LeftFly.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
 			RightFly.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
 		}
@@ -48,7 +48,7 @@ int main() {
 			RightFLy.stop(brakeType::brake);
 		}
 			
-		if(Controller1.ButtonUp.pressing()) {
+		if(Controller1.ButtonUp.pressing()) { //Ball Intake
 			BallIntake.spin(directionType::fwd, CapSpeedPCT, velocityUnits::pct);
 		}
 			
@@ -59,6 +59,7 @@ int main() {
 			BallIntake.stop(brakeType::brake);
 		}
 
+		
         task::sleep(200);
     }
 }
