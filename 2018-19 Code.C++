@@ -7,16 +7,16 @@ int main() {
 	}
 	
 //Use these variables to set the speed of the arm and claw.
-	int LiftSpeedPCT = 50;
-	int CapSpeedPCT = 50;
+	int LiftSpeedPCT = 100;
+	int CapSpeedPCT = 100;
 	int FlySpeedPCT = 100;
 
 	while(true) { 
-		if(Controller1.ButtonL1.pressing()) { //Lift
+		if(Controller1.ButtonL1.pressing()) { //Lift Deploy
 			LeftLift.spin(directionType::fwd, LiftSpeedPCT, velocityUnits::pct);
 			RightLift.spin(directionType::fwd, LiftSpeedPCT, velocityUnits::pct);
 		}
-		else if(Controller1.ButtonL2.pressing()) {
+		else if(Controller1.ButtonL2.pressing()) { //Lift Retract
 			LeftLift.spin(directionType::rev, LiftSpeedPCT, velocityUnits::pct);
 			RightLift.spin(directionType::rev, LiftSpeedPCT, velocityUnits::pct);
 		}
@@ -25,21 +25,21 @@ int main() {
 			RightLift.stop(brakeType::brake);
 		}
 		
-		if(Controller1.ButtonR1.pressing()) { //Cap flip
+		if(Controller1.ButtonR1.pressing()) { //Cap Forward
 			CapFlip.spin(directionType::fwd, CapSpeedPCT, velocityUnits::pct);
 		}
-		else if(Controller1.ButtonR2.pressing()) {
+		else if(Controller1.ButtonR2.pressing()) { //Cap Backward
 			CapFlip.spin(directionType::rev, CapSpeedPCT, velocityUnits::pct);
 		}
 		else {
 			CapFlip.stop(brakeType::brake);
 		}
 		
-		if(Controller1.ButtonA.pressing()) { //Flywheel
+		if(Controller1.ButtonA.pressing()) { //Flywheel Forward
 			LeftFly.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
 			RightFly.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
 		}
-		if(Controller1.ButtonY.pressing()) {
+		else if(Controller1.ButtonY.pressing()) { //Flywheel Backward
 			LeftFly.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
 			RightFly.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
 		}
@@ -48,11 +48,10 @@ int main() {
 			RightFLy.stop(brakeType::brake);
 		}
 			
-		if(Controller1.ButtonUp.pressing()) { //Ball Intake
+		if(Controller1.ButtonUp.pressing()) { //Ball Intake Forward
 			BallIntake.spin(directionType::fwd, CapSpeedPCT, velocityUnits::pct);
-		}
-			
-		else if(Controller1.ButtonDown.pressing()) {
+		}	
+		else if(Controller1.ButtonDown.pressing()) { //Ball Intake Backward
 			BallIntake.spin(directionType::rev, CapSpeedPCT, velocityUnits::pct);
 		}
 		else {
