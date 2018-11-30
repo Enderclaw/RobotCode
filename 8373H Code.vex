@@ -30,6 +30,7 @@ void pre_auton( void ) {
 /*---------------------------------------------------------------------------*/
 
 void autonomous( void ) {
+	while (1) {
  //Use these variables to set the speed of the arm and claw.
 	int LiftSpeedPCT = 100;
 	int FlySpeedPCT = 100;
@@ -39,6 +40,7 @@ void autonomous( void ) {
  
  BallIntake.spin(directionType::fwd, LiftSpeedPCT, velocityUnits::pct);
     vex::task::sleep(200);
+ }
 }
 
 /*----------------------------------------------------------------------------*/
@@ -136,5 +138,9 @@ int main() {
     //Set up callbacks for autonomous and driver control periods.
     Competition.autonomous( autonomous );
     Competition.drivercontrol( usercontrol );
+ //prevent main from exiting with while loop
+ 	while (1){
+ 	vex::task::sleep(100);
+ 	}
  
  }
