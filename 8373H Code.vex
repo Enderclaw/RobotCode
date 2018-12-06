@@ -1,10 +1,11 @@
-
 #include "robot-config.h"
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
 /*        Description: Competition template for VCS VEX V5                   */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
+
+
 
 /*---------------------------------------------------------------------------*/
 /*                          Pre-Autonomous Functions                         */
@@ -17,6 +18,7 @@
 /*---------------------------------------------------------------------------*/
 
 void pre_auton( void ) {
+ 
 }
 
 /*---------------------------------------------------------------------------*/
@@ -30,16 +32,20 @@ void pre_auton( void ) {
 /*---------------------------------------------------------------------------*/
 
 void autonomous( void ) {
-	while (1) {
- //Use these variables to set the speed of the arm and claw.
-	int LiftSpeedPCT = 100;
+ while (1) {
+    //Use these variables to set the speed of the arm and claw.
+	int LiftSpeedPCT = 50;
 	int FlySpeedPCT = 100;
     
- LeftFly.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
- RightFly.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
- 
- BallIntake.spin(directionType::fwd, LiftSpeedPCT, velocityUnits::pct);
-    vex::task::sleep(200);
+    BallIntake.rotateFor(2.5,timeUnits::sec,50,velocityUnits::pct);    
+    vex::task::sleep(300);
+         
+    PunchAngle.rotateFor(2.5,timeUnits::sec,250,velocityUnits::pct);
+    vex::task::sleep(500);
+    
+    PunchFire.rotateFor(2.5,timeUnits::msec,250,velocityUnits::pct);
+    vex::task::sleep(100);
+    
  }
 }
 
@@ -91,20 +97,27 @@ void usercontrol( void ) {
 		}
         
         
-		if(Controller1.ButtonA.pressing()) { //Flywheel Forward
-			LeftFly.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
-			RightFly.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
+		if(Controller1.ButtonA.pressing()) { //Elevate Puncher
+			PunchAngle.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
+
 		}
-		else if(Controller1.ButtonY.pressing()) { //Flywheel Backward
-			LeftFly.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
-			RightFly.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
+		else if(Controller1.ButtonY.pressing()) { //Depress Puncher
+			PunchAngle.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
+			
 		}
 		else {
-			LeftFly.stop(brakeType::brake);
-			RightFly.stop(brakeType::brake);
+			PunchAngle.stop(brakeType::brake);
 		}
-        
-        
+        if(Controller1.ButtonX.pressing()) { //Engage Puncher
+            PunchFire.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
+        }
+        else if(Controller1.ButtonB.pressing()) {
+            PunchFire.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
+        }
+        else {
+            PunchFire.stop(brakeType::brake);
+        }
+      
 		if(Controller1.ButtonUp.pressing()) { //Ball Intake Forward
 			BallIntake.spin(directionType::fwd, CapSpeedPCT, velocityUnits::pct);
         }
@@ -117,16 +130,13 @@ void usercontrol( void ) {
 			BallIntake.stop(brakeType::brake);
 		}
         
-        task::sleep(200);
+        vex::task::sleep(200);
     }
 
-    // ........................................................................
-    // Insert user code here. This is where you use the joystick values to 
-    // update your motors, etc.
-    // ........................................................................
- 
     vex::task::sleep(20); //Sleep the task for a short amount of time to prevent wasted resources. 
-  }
+ }
+
+
 //
 // Main will set up the competition functions and callbacks.
 //
@@ -138,9 +148,9 @@ int main() {
     //Set up callbacks for autonomous and driver control periods.
     Competition.autonomous( autonomous );
     Competition.drivercontrol( usercontrol );
- //prevent main from exiting with while loop
- 	while (1){
- 	vex::task::sleep(100);
- 	}
- 
+    
+ //prevent main from exiting with a while loop
+    while (1) {
+        vex::task::sleep(100);
+    }
  }
