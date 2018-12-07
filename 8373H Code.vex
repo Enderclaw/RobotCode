@@ -40,11 +40,8 @@ void autonomous( void ) {
     BallIntake.rotateFor(2.5,timeUnits::sec,50,velocityUnits::pct);    
     vex::task::sleep(300);
          
-    PunchAngle.rotateFor(2.5,timeUnits::sec,250,velocityUnits::pct);
+    FlyWheel.rotateFor(2.5,timeUnits::sec,250,velocityUnits::pct);
     vex::task::sleep(500);
-    
-    PunchFire.rotateFor(2.5,timeUnits::msec,250,velocityUnits::pct);
-    vex::task::sleep(100);
     
  }
 }
@@ -100,25 +97,16 @@ void usercontrol( void ) {
         
         
 		if(Controller1.ButtonA.pressing()) { //Elevate Puncher
-			PunchAngle.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
+			FlyWheel.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
 
 		}
 		else if(Controller1.ButtonY.pressing()) { //Depress Puncher
-			PunchAngle.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
+			FlyWheel.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
 			
 		}
 		else {
-			PunchAngle.stop(brakeType::brake);
+			FlyWheel.stop(brakeType::brake);
 		}
-        if(Controller1.ButtonX.pressing()) { //Engage Puncher
-            PunchFire.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
-        }
-        else if(Controller1.ButtonB.pressing()) {
-            PunchFire.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
-        }
-        else {
-            PunchFire.stop(brakeType::brake);
-        }
       
 		if(Controller1.ButtonUp.pressing()) { //Ball Intake Forward
 			BallIntake.spin(directionType::fwd, CapSpeedPCT, velocityUnits::pct);
