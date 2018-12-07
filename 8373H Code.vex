@@ -72,6 +72,8 @@ void usercontrol( void ) {
       LeftDrive.spin(vex::directionType::fwd, Controller1.Axis3.value(), vex::velocityUnits::pct);
       RightDrive.spin(vex::directionType::fwd, Controller1.Axis2.value(), vex::velocityUnits::pct);
       
+      vex::task::sleep(200);
+  
 		if(Controller1.ButtonL1.pressing()) { //Lift Deploy
 			LeftLift.spin(directionType::fwd, LiftSpeedPCT, velocityUnits::pct);
 			RightLift.spin(directionType::fwd, LiftSpeedPCT, velocityUnits::pct);
