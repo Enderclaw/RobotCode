@@ -113,7 +113,7 @@ void usercontrol( void ) {
         int LiftSpeedPCT = 50;
         int CapSpeedPCT = 25;  
         int FlySpeedPCT = 200;
-        int WheelSpeedPCT = 100;
+        int WheelSpeedPCT = 75;
 
         LeftDrive.spin(vex::directionType::fwd, Controller1.Axis3.value(), vex::velocityUnits::pct);
         RightDrive.spin(vex::directionType::fwd, Controller1.Axis2.value(), vex::velocityUnits::pct);
