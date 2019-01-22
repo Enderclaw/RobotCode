@@ -5,118 +5,130 @@ void pre_auton( void ) {
 }
 
 void redback( void ) {
-    while (1) {
-        int LiftSpeedPCT = 50;
-        int WheelSpeedPCT = 50;
-        int FlySpeedPCT = 200;
-        
-        LeftDrive.spin(directionType::fwd, WheelSpeedPCT, velocityUnits::pct);
-        RightDrive.spin(directionType::fwd, WheelSpeedPCT, velocityUnits::pct);
-        vex::task::sleep(1000);
-        LeftDrive.stop();
-        RightDrive.stop();
-        
-        LeftDrive.spin(directionType::rev, WheelSpeedPCT, velocityUnits::pct);
-        RightDrive.spin(directionType::fwd, WheelSpeedPCT, velocityUnits::pct);
-        vex::task::sleep(1000);
-        LeftDrive.stop();
-        RightDrive.stop();
-        
-        LeftLift.spin(directionType::fwd, LiftSpeedPCT, velocityUnits::pct);
-        RightLift.spin(directionType::fwd, LiftSpeedPCT, velocityUnits::pct);
-        vex::task::sleep(2000);
-        RightLift.stop();
-        LeftLift.stop();
-        
-        FlyWheel.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
-        vex::task::sleep(3000);
-        BallIntake.spin(directionType::rev, LiftSpeedPCT, velocityUnits::pct);
-        vex::task::sleep(1000);
-        BallIntake.stop();
-        FlyWheel.stop();
-        
-        LeftLift.spin(directionType::rev, LiftSpeedPCT, velocityUnits::pct);
-        RightLift.spin(directionType::rev, LiftSpeedPCT, velocityUnits::pct);
-        vex::task::sleep(2000);
-        RightLift.stop();
-        LeftLift.stop();
-        
-        LeftDrive.spin(directionType::rev, WheelSpeedPCT, velocityUnits::pct);
-        RightDrive.spin(directionType::rev, WheelSpeedPCT, velocityUnits::pct);
-        vex::task::sleep(1000);
-        LeftDrive.stop();
-        RightDrive.stop();
-        
-        LeftDrive.spin(directionType::fwd, WheelSpeedPCT, velocityUnits::pct);
-        RightDrive.spin(directionType::rev, WheelSpeedPCT, velocityUnits::pct);
-        vex::task::sleep(1000);
-        LeftDrive.stop();
-        RightDrive.stop();
-        vex::task::sleep(2000);
-    }
+    int LiftSpeedPCT = 50;
+    int WheelSpeedPCT = 50;
+    int FlySpeedPCT = 200;
+    
+    LeftDrive.spin(directionType::fwd, WheelSpeedPCT, velocityUnits::pct);
+    RightDrive.spin(directionType::fwd, WheelSpeedPCT, velocityUnits::pct);
+    vex::task::sleep(1000);
+    LeftDrive.stop();
+    RightDrive.stop();
+    
+    LeftDrive.spin(directionType::rev, WheelSpeedPCT, velocityUnits::pct);
+    RightDrive.spin(directionType::fwd, WheelSpeedPCT, velocityUnits::pct);
+    vex::task::sleep(1000);
+    LeftDrive.stop();
+    RightDrive.stop();
+    
+    LeftLift.spin(directionType::fwd, LiftSpeedPCT, velocityUnits::pct);
+    RightLift.spin(directionType::fwd, LiftSpeedPCT, velocityUnits::pct);
+    vex::task::sleep(2000);
+    RightLift.stop();
+    LeftLift.stop();
+    
+    //FlyWheel.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
+    vex::task::sleep(3000);
+    BallIntake.spin(directionType::rev, LiftSpeedPCT, velocityUnits::pct);
+    vex::task::sleep(1000);
+    BallIntake.stop();
+    //FlyWheel.stop();
+    
+    LeftLift.spin(directionType::rev, LiftSpeedPCT, velocityUnits::pct);
+    RightLift.spin(directionType::rev, LiftSpeedPCT, velocityUnits::pct);
+    vex::task::sleep(2000);
+    RightLift.stop();
+    LeftLift.stop();
+    
+    LeftDrive.spin(directionType::rev, WheelSpeedPCT, velocityUnits::pct);
+    RightDrive.spin(directionType::rev, WheelSpeedPCT, velocityUnits::pct);
+    vex::task::sleep(1000);
+    LeftDrive.stop();
+    RightDrive.stop();
+    
+    LeftDrive.spin(directionType::fwd, WheelSpeedPCT, velocityUnits::pct);
+    RightDrive.spin(directionType::rev, WheelSpeedPCT, velocityUnits::pct);
+    vex::task::sleep(1000);
+    LeftDrive.stop();
+    RightDrive.stop();
+    vex::task::sleep(2000);
 }
 
 void blueback( void ) {
-    while (1) {
-        int LiftSpeedPCT = 50;
-        int WheelSpeedPCT = 50;
-        int FlySpeedPCT = 200;
-        
-        LeftDrive.spin(directionType::fwd, WheelSpeedPCT, velocityUnits::pct);
-        RightDrive.spin(directionType::fwd, WheelSpeedPCT, velocityUnits::pct);
-        vex::task::sleep(1000);
-        LeftDrive.stop();
-        RightDrive.stop();
-        
-        LeftDrive.spin(directionType::fwd, WheelSpeedPCT, velocityUnits::pct);
-        RightDrive.spin(directionType::rev, WheelSpeedPCT, velocityUnits::pct);
-        vex::task::sleep(1000);
-        LeftDrive.stop();
-        RightDrive.stop();
-        
-        LeftLift.spin(directionType::fwd, LiftSpeedPCT, velocityUnits::pct);
-        RightLift.spin(directionType::fwd, LiftSpeedPCT, velocityUnits::pct);
-        vex::task::sleep(2000);
-        RightLift.stop();
-        LeftLift.stop();
-        
-        FlyWheel.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
-        vex::task::sleep(3000);
-        BallIntake.spin(directionType::rev, LiftSpeedPCT, velocityUnits::pct);
-        vex::task::sleep(1000);
-        BallIntake.stop();
-        FlyWheel.stop();
-        
-        LeftLift.spin(directionType::rev, LiftSpeedPCT, velocityUnits::pct);
-        RightLift.spin(directionType::rev, LiftSpeedPCT, velocityUnits::pct);
-        vex::task::sleep(2000);
-        RightLift.stop();
-        LeftLift.stop();
-        
-        LeftDrive.spin(directionType::rev, WheelSpeedPCT, velocityUnits::pct);
-        RightDrive.spin(directionType::rev, WheelSpeedPCT, velocityUnits::pct);
-        vex::task::sleep(1000);
-        LeftDrive.stop();
-        RightDrive.stop();
-        
-        LeftDrive.spin(directionType::rev, WheelSpeedPCT, velocityUnits::pct);
-        RightDrive.spin(directionType::fwd, WheelSpeedPCT, velocityUnits::pct);
-        vex::task::sleep(1000);
-        LeftDrive.stop();
-        RightDrive.stop();
-        vex::task::sleep(2000);
-    }
+    int LiftSpeedPCT = 50;
+    int WheelSpeedPCT = 50;
+    int FlySpeedPCT = 200;
+    
+    LeftDrive.spin(directionType::fwd, WheelSpeedPCT, velocityUnits::pct);
+    RightDrive.spin(directionType::fwd, WheelSpeedPCT, velocityUnits::pct);
+    vex::task::sleep(1000);
+    LeftDrive.stop();
+    RightDrive.stop();
+    
+    LeftDrive.spin(directionType::fwd, WheelSpeedPCT, velocityUnits::pct);
+    RightDrive.spin(directionType::rev, WheelSpeedPCT, velocityUnits::pct);
+    vex::task::sleep(1000);
+    LeftDrive.stop();
+    RightDrive.stop();
+    
+    LeftLift.spin(directionType::fwd, LiftSpeedPCT, velocityUnits::pct);
+    RightLift.spin(directionType::fwd, LiftSpeedPCT, velocityUnits::pct);
+    vex::task::sleep(2000);
+    RightLift.stop();
+    LeftLift.stop();
+    
+    //FlyWheel.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
+    vex::task::sleep(3000);
+    BallIntake.spin(directionType::rev, LiftSpeedPCT, velocityUnits::pct);
+    vex::task::sleep(1000);
+    BallIntake.stop();
+    //FlyWheel.stop();
+    
+    LeftLift.spin(directionType::rev, LiftSpeedPCT, velocityUnits::pct);
+    RightLift.spin(directionType::rev, LiftSpeedPCT, velocityUnits::pct);
+    vex::task::sleep(2000);
+    RightLift.stop();
+    LeftLift.stop();
+    
+    LeftDrive.spin(directionType::rev, WheelSpeedPCT, velocityUnits::pct);
+    RightDrive.spin(directionType::rev, WheelSpeedPCT, velocityUnits::pct);
+    vex::task::sleep(1000);
+    LeftDrive.stop();
+    RightDrive.stop();
+    
+    LeftDrive.spin(directionType::rev, WheelSpeedPCT, velocityUnits::pct);
+    RightDrive.spin(directionType::fwd, WheelSpeedPCT, velocityUnits::pct);
+    vex::task::sleep(1000);
+    LeftDrive.stop();
+    RightDrive.stop();
+    vex::task::sleep(2000);
 }
 
 void usercontrol( void ) {
     while (1){
-        int LiftSpeedPCT = 50;
-        int CapSpeedPCT = 25;  
-        int FlySpeedPCT = 200;
-        int WheelSpeedPCT = 75;
-
-        LeftDrive.spin(vex::directionType::fwd, Controller1.Axis3.value(), vex::velocityUnits::pct);
-        RightDrive.spin(vex::directionType::fwd, Controller1.Axis2.value(), vex::velocityUnits::pct);
+        int Dir = 0;
+        int LiftSpeedPCT  = 100;
+        int BallSpeedPCT  = 50;  
+        int FlySpeedPCT   = 200;
+        int WheelSpeedPCT = 100;
+        void RPressed() {
+            Dir = 1 - Dir;
+        }
+         
+        if (Dir == 1) {
+            LeftDrive.spin(vex::directionType::fwd, Controller1.Axis3.value()*100, vex::velocityUnits::pct);
+            RightDrive.spin(vex::directionType::fwd, Controller1.Axis2.value()*100, vex::velocityUnits::pct);
+        }
+        else if (Dir == 0) {
+            LeftDrive.spin(vex::directionType::rev, Controller1.Axis3.value()*100, vex::velocityUnits::pct);
+            RightDrive.spin(vex::directionType::rev, Controller1.Axis2.value()*100, vex::velocityUnits::pct);
+        }
+        else{
+            
+        }
+        
+        LeftDrive.spin(vex::directionType::fwd, Controller1.Axis3.value()*100, vex::velocityUnits::pct);
+        RightDrive.spin(vex::directionType::fwd, Controller1.Axis2.value()*100, vex::velocityUnits::pct);
 
 		if(Controller1.ButtonL1.pressing()) { //Lift Deploy
 			LeftLift.spin(directionType::fwd, LiftSpeedPCT, velocityUnits::pct);
@@ -131,35 +143,30 @@ void usercontrol( void ) {
 			RightLift.stop(brakeType::brake);
 		}
         
-		if(Controller1.ButtonR1.pressing()) { //Cap Forward
-			CapFlip.spin(directionType::fwd, CapSpeedPCT, velocityUnits::pct);
-		}
-		else if(Controller1.ButtonR2.pressing()) { //Cap Backward
-			CapFlip.spin(directionType::rev, CapSpeedPCT, velocityUnits::pct);
-		}
-		else {
-			CapFlip.stop(brakeType::brake);
-		}
+		Controller1.ButtonR1.pressed(RPressed)) //Cap Forward
         
+		Controller1.ButtonR2.pressed(RPressed)) //Cap Backward
         
 		if(Controller1.ButtonA.pressing()) { //Flywheel Forward
-			FlyWheel.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
+			FlyWheelRight.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
+            FlyWheelLeft.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
 		}
 		else if(Controller1.ButtonY.pressing()) { //Flywheel Backward
-			FlyWheel.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
-			
+			FlyWheelRight.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
+            FlyWheelLeft.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
 		}
 		else {
-			FlyWheel.stop(brakeType::brake);
+			FlyWheelRight.stop(brakeType::brake);
+            FlyWheelLeft.stop(brakeType::brake);
 		}
         
 		if(Controller1.ButtonUp.pressing()) { //Ball Intake Forward
-			BallIntake.spin(directionType::fwd, CapSpeedPCT, velocityUnits::pct);
+			BallIntake.spin(directionType::fwd, BallSpeedPCT, velocityUnits::pct);
             
         }
         
 		else if(Controller1.ButtonDown.pressing()) { //Ball Intake Backward
-			BallIntake.spin(directionType::rev, CapSpeedPCT, velocityUnits::pct);
+			BallIntake.spin(directionType::rev, BallSpeedPCT, velocityUnits::pct);
 		}
        
 		else {
