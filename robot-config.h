@@ -1,10 +1,9 @@
-using namespace vex;
 vex::brain Brain;
-vex::motor LeftDrive (vex::PORT1, vex::gearSetting::ratio18_1, false); 
-vex::motor RightDrive (vex::PORT10, vex::gearSetting::ratio18_1, true);
-vex::motor LeftLift (vex::PORT2, vex::gearSetting::ratio18_1, false); 
-vex::motor RightLift (vex::PORT9, vex::gearSetting::ratio18_1, true);
-vex::motor LeftFly (vex::PORT3, vex::gearSetting::ratio18_1, false);
-vex::motor RightFly (vex::PORT8, vex::gearSetting::ratio18_1, true);
-vex::motor BallIntake (vex::PORT4, vex::gearSetting::ratio18_1, false);
-vex::motor CapFlip (vex::PORT7, vex::gearSetting::ratio18_1, false);
+vex::motor LeftDrive = vex::motor(vex::PORT1, vex::gearSetting::ratio18_1);
+vex::motor LeftLift = vex::motor(vex::PORT2, vex::gearSetting::ratio18_1);
+vex::motor LeftFly = vex::motor(vex::PORT3, vex::gearSetting::ratio18_1);
+vex::motor BallIntake = vex::motor(vex::PORT4, vex::gearSetting::ratio18_1);
+vex::motor RightFly = vex::motor(vex::PORT8, vex::gearSetting::ratio18_1, true);
+vex::motor RightLift = vex::motor(vex::PORT9, vex::gearSetting::ratio18_1, true);
+vex::motor RightDrive = vex::motor(vex::PORT10, vex::gearSetting::ratio18_1, true);
+vex::controller Controller1;
