@@ -1,128 +1,138 @@
 #include "robot-config.h"
-/*---------------------------------------------------------------------------*/
-/*                                                                           */
-/*        Description: Competition template for VCS VEX V5                    */
-/*                                                                           */
-/*---------------------------------------------------------------------------*/
-
-vex::competition Competition;
-
-/*---------------------------------------------------------------------------*/
-/*                          Pre-Autonomous Functions                         */
-/*                                                                           */
-/*  You may want to perform some actions before the competition starts.      */
-/*  Do them in the following function.  You must return from this function   */
-/*  or the autonomous and usercontrol tasks will not be started.  This       */
-/*  function is only called once after the cortex has been powered on and    */ 
-/*  not every time that the robot is disabled.                               */
-/*---------------------------------------------------------------------------*/
 
 void pre_auton( void ) {
-  // All activities that occur before the competition starts
-  // Example: clearing encoders, setting servo positions, ...
-  
+    
 }
 
-/*---------------------------------------------------------------------------*/
-/*                                                                           */
-/*                              Autonomous Task                              */
-/*                                                                           */
-/*  This task is used to control your robot during the autonomous phase of   */
-/*  a VEX Competition.                                                       */
-/*                                                                           */
-/*  You must modify the code to add your own robot specific commands here.   */
-/*---------------------------------------------------------------------------*/
-
-void autonomous( void ) {
-}
-/*---------------------------------------------------------------------------*/
-/*                                                                           */
-/*                              User Control Task                            */
-/*                                                                           */
-/*  This task is used to control your robot during the user control phase of */
-/*  a VEX Competition.                                                       */
-/*                                                                           */
-/*  You must modify the code to add your own robot specific commands here.   */
-/*---------------------------------------------------------------------------*/
-
- 
-//
-// Main will set up the competition functions and callbacks.
-//
 void usercontrol( void ) {
-    int Dir = 0;
-    int LiftSpeedPCT  = 100;
-    int BallSpeedPCT  = 50;  
-    int WheelSpeedPCT = 100;
+    while (1){
+        int Spd = 1;
+        int LiftSpeedPCT  = 100;
+        int BallSpeedPCT  = 50;  
+        int FlySpeedPCT   = 200;
         
-    if (Dir == 1) {
-        LeftDrive.spin(vex::directionType::fwd, Controller1.Axis3.value()*100, vex::velocityUnits::pct);
-        RightDrive.spin(vex::directionType::fwd, Controller1.Axis2.value()*100, vex::velocityUnits::pct);
-    }
-    else if (Dir == 0) {
-        LeftDrive.spin(vex::directionType::rev, Controller1.Axis3.value()*100, vex::velocityUnits::pct);
-        RightDrive.spin(vex::directionType::rev, Controller1.Axis2.value()*100, vex::velocityUnits::pct);
-    }
-    else{
+        if (Controller1.ButtonUp.pressing()) {
+            Spd = 1;
+        }
+        else {
+            Spd = Spd;
+        }
+        
+        if (Controller1.ButtonDown.pressing()) {
+            Spd = 0;
+        }
+        else{
+            Spd = Spd;
+        }
+        
+        if (Spd == 1) {
+            LeftDrive.spin(vex::directionType::rev, Controller1.Axis3.value(), vex::velocityUnits::pct);
+            RightDrive.spin(vex::directionType::rev, Controller1.Axis2.value(), vex::velocityUnits::pct);
+        }
+        else {
+            LeftDrive.spin(vex::directionType::rev, Controller1.Axis3.value()/2, vex::velocityUnits::pct);
+            RightDrive.spin(vex::directionType::rev, Controller1.Axis2.value()/2, vex::velocityUnits::pct);
+        }
+        
+		if(Controller1.ButtonL1.pressing()) { //Lift Deploy
+			LeftLift.spin(directionType::fwd, LiftSpeedPCT, velocityUnits::pct);
+			RightLift.spin(directionType::fwd, LiftSpeedPCT, velocityUnits::pct);
+		}
+		else if(Controller1.ButtonL2.pressing()) { //Lift Retract
+			LeftLift.spin(directionType::rev, LiftSpeedPCT, velocityUnits::pct);
+			RightLift.spin(directionType::rev, LiftSpeedPCT, velocityUnits::pct);
+		}
+		else {
+			LeftLift.stop(brakeType::brake);
+			RightLift.stop(brakeType::brake);
+		}
+        
+		if(Controller1.ButtonR1.pressing()) { //Flywheel Forward
+			FlyWheelRight.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
+            FlyWheelLeft.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
+		}
+		else if(Controller1.ButtonR2.pressing()) { //Flywheel Backward
+			FlyWheelRight.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
+            FlyWheelLeft.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
+		}
+		else {
+			FlyWheelRight.stop(brakeType::brake);
+            FlyWheelLeft.stop(brakeType::brake);
+		}
+        
+		if(Controller1.ButtonX.pressing()) { //Ball Intake Forward
+			BallIntake.spin(directionType::rev, BallSpeedPCT, velocityUnits::pct);
             
-    }
+        }
+		else if(Controller1.ButtonA.pressing()) { //Ball Intake Backward
+			BallIntake.spin(directionType::fwd, BallSpeedPCT, velocityUnits::pct);
+		}
+		else {
+			BallIntake.stop(brakeType::brake);
+		}
         
-    LeftDrive.spin(vex::directionType::fwd, Controller1.Axis3.value()*100, vex::velocityUnits::pct);
-    RightDrive.spin(vex::directionType::fwd, Controller1.Axis2.value()*100, vex::velocityUnits::pct);
-
-	if (Controller1.ButtonL1.pressing()) { //Lift Deploy
-	    LeftLift.spin(vex::directionType::fwd, LiftSpeedPCT, vex::velocityUnits::pct);
-		RightLift.spin(vex::directionType::fwd, LiftSpeedPCT, vex::velocityUnits::pct);
-	}
-	else if(Controller1.ButtonL2.pressing()) { //Lift Retract
-		LeftLift.spin(vex::directionType::rev, LiftSpeedPCT, vex::velocityUnits::pct);
-		RightLift.spin(vex::directionType::rev, LiftSpeedPCT, vex::velocityUnits::pct);
-	}
-	else {
-		LeftLift.stop(vex::brakeType::brake);
-		RightLift.stop(vex::brakeType::brake);
-	};
-       
-	if(Controller1.ButtonA.pressing()) { //Flywheel Forward
-		RightFly.spin(vex::directionType::fwd, WheelSpeedPCT, vex::velocityUnits::pct);
-        LeftFly.spin(vex::directionType::fwd, WheelSpeedPCT, vex::velocityUnits::pct);
-	}
-	else if(Controller1.ButtonY.pressing()) { //Flywheel Backward
-	    RightFly.spin(vex::directionType::rev, WheelSpeedPCT, vex::velocityUnits::pct);
-        LeftFly.spin(vex::directionType::rev, WheelSpeedPCT, vex::velocityUnits::pct);
-	}
-	else {
-		RightFly.stop(vex::brakeType::brake);
-        LeftFly.stop(vex::brakeType::brake);
-	}
-       
-	if(Controller1.ButtonUp.pressing()) { //Ball Intake Forward
-		BallIntake.spin(vex::directionType::fwd, BallSpeedPCT, vex::velocityUnits::pct);
-           
+        vex::task::sleep(20);
     }
-       
-	else if(Controller1.ButtonDown.pressing()) { //Ball Intake Backward
-		BallIntake.spin(vex::directionType::rev, BallSpeedPCT, vex::velocityUnits::pct);
-	}
-      
-	else {
-		BallIntake.stop(vex::brakeType::brake);
-	}
 }
-    
-int main() {
-    
-    //Run the pre-autonomous function. 
-    pre_auton();
-    
-    //Set up callbacks for autonomous and driver control periods.
-    Competition.drivercontrol( usercontrol );
-    Competition.autonomous( autonomous );
-   
-   
 
-    //Prevent main from exiting with an infinite loop.
-    while (1) {
+int main() {
+    pre_auton();
+    Competition.drivercontrol(usercontrol);
+    Competition.autonomous(pre_auton);
+    
+    /*
+    int Menu = 1;
+    
+    Brain.Screen.setPenColor(vex::color::black);
+    Brain.Screen.setFillColor(vex::color::red);
+    Brain.Screen.drawRectangle(0, 0, 100, 100);
+    Brain.Screen.drawRectangle(0, 140, 100, 100);
+    
+    Brain.Screen.setPenColor(vex::color::black);
+    Brain.Screen.setFillColor(vex::color::blue);
+    Brain.Screen.drawRectangle(380, 0, 100, 100);
+    Brain.Screen.drawRectangle(380, 140, 100, 100);
+    
+    
+ 	while (1){
+        int x = Brain.Screen.xPosition();
+        int y = Brain.Screen.xPosition();
         
-    }
-}  
+        if (Menu == 1) {
+            if(Brain.Screen.pressing() && x >= 0 && x <= 100 && y >= 0 && y <= 100) {
+                Brain.Screen.clearScreen();
+                //Competition.autonomous( auton1 );
+                //Menu == 2;
+                
+                Brain.Screen.setPenColor(vex::color::black);
+                Brain.Screen.setFillColor(vex::color::white);
+                Brain.Screen.drawRectangle(0, 0, 100, 100);
+            }
+            else if(Brain.Screen.pressing() && x >= 0 && x <= 100 && y >= 140 && y <= 240) {
+                Brain.Screen.clearScreen();
+                //Competition.autonomous( auton2 );
+                //Menu == 2;
+                
+                Brain.Screen.setPenColor(vex::color::black);
+                Brain.Screen.setFillColor(vex::color::white);
+                Brain.Screen.drawRectangle(0, 140, 100, 100);
+            }
+            
+            else if(Brain.Screen.pressing() && x >= 380 && x <= 480 && y >= 0 && y <= 100) {
+                Brain.Screen.clearScreen();
+                //Competition.autonomous( auton2 );
+                //Menu == 2;
+            }
+            else if(Brain.Screen.pressing() && x >= 380 && x <= 480 && y >= 140 && y <= 240) {
+                Brain.Screen.clearScreen();
+                //Competition.autonomous( auton2 );
+                //Menu == 2;
+            }
+            else {}
+            
+        }
+        
+        vex::task::sleep(100);
+ 	}
+    */
+ }
