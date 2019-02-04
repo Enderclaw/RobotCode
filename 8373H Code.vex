@@ -1,9 +1,31 @@
 #include "robot-config.h"
 
 void pre_auton( void ) {
-    
-}
+    LeftDrive.resetRotation();
+    RightDrive.resetRotation();
 
+}
+void autonomous(void){
+    int DriveSpeedPCT = 100;
+    bool waitForCompletion = true;
+    LeftDrive.rotateFor(1440, rotationUnits::deg, DriveSpeedPCT, velocityUnits::pct, waitForCompletion);
+    RightDrive.rotateFor(1440, rotationUnits::deg, DriveSpeedPCT, velocityUnits::pct, waitForCompletion);
+    
+    LeftDrive.stop(brakeType::brake);
+    RightDrive.stop(brakeType::brake);
+    
+    LeftDrive.resetRotation();
+    RightDrive.resetRotation();
+    
+    LeftDrive.rotateFor(1080, rotationUnits::deg, DriveSpeedPCT, velocityUnits::pct, waitForCompletion);
+    RightDrive.rotateFor(-1080, rotationUnits::deg, DriveSpeedPCT, velocityUnits::pct, waitForCompletion);
+    
+    LeftDrive.stop(brakeType::brake);
+    RightDrive.stop(brakeType::brake);
+    
+    LeftDrive.resetRotation();
+    RightDrive.resetRotation();
+}
 void usercontrol( void ) {
     while (1){
         int Spd = 1;
@@ -15,14 +37,14 @@ void usercontrol( void ) {
             Spd = 1;
         }
         else {
-            Spd = Spd;
+            Spd = 1;
         }
         
         if (Controller1.ButtonDown.pressing()) {
             Spd = 0;
         }
         else{
-            Spd = Spd;
+            Spd = 1;
         }
         
         if (Spd == 1) {
@@ -48,16 +70,16 @@ void usercontrol( void ) {
 		}
         
 		if(Controller1.ButtonR1.pressing()) { //Flywheel Forward
-			FlyWheelRight.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
-            FlyWheelLeft.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
+			RightFly.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
+            LeftFly.spin(directionType::rev, FlySpeedPCT, velocityUnits::pct);
 		}
 		else if(Controller1.ButtonR2.pressing()) { //Flywheel Backward
-			FlyWheelRight.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
-            FlyWheelLeft.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
+			RightFly.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
+            LeftFly.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
 		}
 		else {
-			FlyWheelRight.stop(brakeType::brake);
-            FlyWheelLeft.stop(brakeType::brake);
+			RightFly.stop(brakeType::brake);
+            LeftFly.stop(brakeType::brake);
 		}
         
 		if(Controller1.ButtonX.pressing()) { //Ball Intake Forward
@@ -78,7 +100,7 @@ void usercontrol( void ) {
 int main() {
     pre_auton();
     Competition.drivercontrol(usercontrol);
-    Competition.autonomous(pre_auton);
+    Competition.autonomous(autonomous);
     
     /*
     int Menu = 1;
