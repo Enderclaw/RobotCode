@@ -11,30 +11,32 @@ void rbautonomous(void){
     
     LeftDrive.spin(vex::directionType::rev, DriveSpeedRPM, vex::velocityUnits::rpm);
     RightDrive.spin(vex::directionType::rev, DriveSpeedRPM, vex::velocityUnits::rpm);
-    task::sleep(2000);
+    task::sleep(2500);
     
     LeftDrive.stop(brakeType::brake);
     RightDrive.stop(brakeType::brake);
     
-    LeftDrive.spin(vex::directionType::rev, DriveSpeedRPM, vex::velocityUnits::rpm);
-    RightDrive.spin(vex::directionType::rev, DriveSpeedRPM, vex::velocityUnits::rpm);
+    //LeftDrive.spin(vex::directionType::fwd, DriveSpeedRPM, vex::velocityUnits::rpm);
+    //RightDrive.spin(vex::directionType::fwd, DriveSpeedRPM, vex::velocityUnits::rpm);
     task::sleep(1000);
     
     LeftDrive.stop(brakeType::brake);
     RightDrive.stop(brakeType::brake);
     
-    LeftDrive.rotateFor(360, rotationUnits::deg, DriveSpeedRPM, velocityUnits::pct, waitForCompletion);
-    RightDrive.rotateFor(-360, rotationUnits::deg, DriveSpeedRPM, velocityUnits::pct, waitForCompletion);
+    LeftDrive.rotateFor(720, rotationUnits::deg, DriveSpeedRPM, velocityUnits::pct, waitForCompletion);
+    RightDrive.rotateFor(-720, rotationUnits::deg, DriveSpeedRPM, velocityUnits::pct, waitForCompletion);
     
     LeftDrive.stop(brakeType::brake);
     RightDrive.stop(brakeType::brake);
     
     LeftDrive.resetRotation();
     RightDrive.resetRotation();
+    task::sleep(100000);
+    
     
     LeftDrive.spin(vex::directionType::rev, DriveSpeedRPM, vex::velocityUnits::rpm);
     RightDrive.spin(vex::directionType::rev, DriveSpeedRPM, vex::velocityUnits::rpm);
-    task::sleep(1000);
+    task::sleep(1200);
     
     LeftDrive.stop(brakeType::brake);
     RightDrive.stop(brakeType::brake);
@@ -113,7 +115,7 @@ void usercontrol( void ) {
 int main() {
     pre_auton();
     Competition.drivercontrol(usercontrol);
-    Competition.autonomous(pre_auton);
+    Competition.autonomous(rbautonomous);
     
     /*
     int Menu = 1;
