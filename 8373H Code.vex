@@ -5,7 +5,8 @@ void pre_auton( void ) {
     RightDrive.resetRotation();
 
 }
-void autonomous(void){
+void autonomousBack( void ){
+    while (1){
     int DriveSpeedPCT = 100;
     bool waitForCompletion = true;
     LeftDrive.rotateFor(1440, rotationUnits::deg, DriveSpeedPCT, velocityUnits::pct, waitForCompletion);
@@ -25,7 +26,37 @@ void autonomous(void){
     
     LeftDrive.resetRotation();
     RightDrive.resetRotation();
+    
+    vex::task::sleep(200);
+    }
 }
+
+void autonomousFront(void){
+    while(1){
+        int FlySpeedPCT = 200;
+        int DriveSpeedPCT = 100;
+        bool waitForCompletion = true;
+        
+        RightDrive.rotateFor(720, rotationUnits::deg, DriveSpeedPCT, velocityUnits::pct, waitForCompletion);
+        LeftDrive.rotateFor(720, rotationUnits::deg, DriveSpeedPCT, velocityUnits::pct, waitForCompletion);
+        
+        LeftDrive.stop(brakeType::brake);
+        RightDrive.stop(brakeType::brake);
+        
+        RightFly.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
+        LeftFly.spin(directionType::fwd, FlySpeedPCT, velocityUnits::pct);
+    
+        BallIntake.spin(directionType::fwd, DriveSpeedPCT, velocityUnits::pct);
+            
+        LeftFly.stop(brakeType::coast);
+        RightFly.stop(brakeType::coast);
+        BallIntake.stop(brakeType::brake);
+        
+        vex::task::sleep(200);
+        
+    }
+}
+
 void usercontrol( void ) {
     while (1){
         int Spd = 1;
@@ -33,7 +64,7 @@ void usercontrol( void ) {
         int BallSpeedPCT  = 50;  
         int FlySpeedPCT   = 200;
         
-        if (Controller1.ButtonUp.pressing()) {
+        /*if (Controller1.ButtonUp.pressing()) {
             Spd = 1;
         }
         else {
@@ -46,11 +77,12 @@ void usercontrol( void ) {
         else{
             Spd = 1;
         }
-        
+        */
         if (Spd == 1) {
             LeftDrive.spin(vex::directionType::rev, Controller1.Axis3.value(), vex::velocityUnits::pct);
             RightDrive.spin(vex::directionType::rev, Controller1.Axis2.value(), vex::velocityUnits::pct);
         }
+        
         else {
             LeftDrive.spin(vex::directionType::rev, Controller1.Axis3.value()/2, vex::velocityUnits::pct);
             RightDrive.spin(vex::directionType::rev, Controller1.Axis2.value()/2, vex::velocityUnits::pct);
@@ -93,14 +125,14 @@ void usercontrol( void ) {
 			BallIntake.stop(brakeType::brake);
 		}
         
-        vex::task::sleep(20);
+        vex::task::sleep(200);
     }
 }
 
 int main() {
     pre_auton();
     Competition.drivercontrol(usercontrol);
-    Competition.autonomous(autonomous);
+    Competition.autonomous(autonomousBack);
     
     /*
     int Menu = 1;
