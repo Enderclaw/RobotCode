@@ -87,16 +87,16 @@ void usercontrol( void ) {
 		}
         
 		if(Controller1.ButtonR1.pressing()) { //Flywheel Forward
-			FlyWheelRight.spin(directionType::rev, FlySpeedRPM, velocityUnits::rpm);
-            FlyWheelLeft.spin(directionType::rev, FlySpeedRPM, velocityUnits::rpm);
+			RightFly.spin(directionType::rev, FlySpeedRPM, velocityUnits::rpm);
+            LeftFly.spin(directionType::rev, FlySpeedRPM, velocityUnits::rpm);
 		}
 		else if(Controller1.ButtonR2.pressing()) { //Flywheel Backward
-			FlyWheelRight.spin(directionType::fwd, FlySpeedRPM, velocityUnits::rpm);
-            FlyWheelLeft.spin(directionType::fwd, FlySpeedRPM, velocityUnits::rpm);
+			RightFly.spin(directionType::fwd, FlySpeedRPM, velocityUnits::rpm);
+            LeftFly.spin(directionType::fwd, FlySpeedRPM, velocityUnits::rpm);
 		}
 		else {
-			FlyWheelRight.stop(brakeType::coast);
-            FlyWheelLeft.stop(brakeType::coast);
+			RightFly.stop(brakeType::coast);
+            LeftFly.stop(brakeType::coast);
 		}
         
 		if(Controller1.ButtonX.pressing()) { //Ball Intake Forward
