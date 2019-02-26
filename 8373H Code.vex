@@ -4,78 +4,218 @@ void pre_auton( void ) {
     
 }
 
-void rbautonomous(void){
-    int DriveSpeedRPM = 100;
-    int LiftSpeedRPM = 100;
+void rbautonomous(void) {    // Function declaring out Right-Back Autonomous
+    int DriveSpeedRPM = 100; //Integer initialization for our Autonomous
+    int LiftSpeedRPM = 100;  //Integer initialization for our Autonomous
     bool waitForCompletion = true;
     
     LeftDrive.spin(vex::directionType::rev, DriveSpeedRPM, vex::velocityUnits::rpm);
     RightDrive.spin(vex::directionType::rev, DriveSpeedRPM, vex::velocityUnits::rpm);
     task::sleep(2500);
+    // This code makes both the right and left side of our drive train go at 100 RPM for 2.5 seconds
     
     LeftDrive.stop(brakeType::brake);
     RightDrive.stop(brakeType::brake);
-    
-    //LeftDrive.spin(vex::directionType::fwd, DriveSpeedRPM, vex::velocityUnits::rpm);
-    //RightDrive.spin(vex::directionType::fwd, DriveSpeedRPM, vex::velocityUnits::rpm);
-    task::sleep(1000);
-    
-    LeftDrive.stop(brakeType::brake);
-    RightDrive.stop(brakeType::brake);
+    // This code stops all movement in the drive train
     
     LeftDrive.rotateFor(720, rotationUnits::deg, DriveSpeedRPM, velocityUnits::pct, waitForCompletion);
     RightDrive.rotateFor(-720, rotationUnits::deg, DriveSpeedRPM, velocityUnits::pct, waitForCompletion);
+    //This code rotates the drive train 720 degrees to the left, giving a full 180 degree rotation.
     
     LeftDrive.stop(brakeType::brake);
     RightDrive.stop(brakeType::brake);
+    //This code stops the drive train after the rotation
     
     LeftDrive.resetRotation();
     RightDrive.resetRotation();
-    task::sleep(100000);
-    
+    //This code resets the rotation counter in the Motor's built in Quadrature encoder.
+}
+
+void lbautonomous(void) {    // Function declaring out Left-Back Autonomous
+    int DriveSpeedRPM = 100; //Integer initialization for our Autonomous
+    int LiftSpeedRPM = 100;  //Integer initialization for our Autonomous
+    bool waitForCompletion = true;
     
     LeftDrive.spin(vex::directionType::rev, DriveSpeedRPM, vex::velocityUnits::rpm);
     RightDrive.spin(vex::directionType::rev, DriveSpeedRPM, vex::velocityUnits::rpm);
-    task::sleep(1200);
+    task::sleep(2500);
+    // This code makes both the right and left side of our drive train go at 100 RPM for 2.5 seconds
+    
+    LeftDrive.stop(brakeType::brake);
+    RightDrive.stop(brakeType::brake);
+    // This code stops all movement in the drive train
+    
+    LeftDrive.rotateFor(720, rotationUnits::deg, DriveSpeedRPM, velocityUnits::pct, waitForCompletion);
+    RightDrive.rotateFor(-720, rotationUnits::deg, DriveSpeedRPM, velocityUnits::pct, waitForCompletion);
+    //This code rotates the drive train 720 degrees to the right, giving a full 180 degree rotation.
+    
+    LeftDrive.stop(brakeType::brake);
+    RightDrive.stop(brakeType::brake);
+    //This code stops the drive train after the rotation
+    
+    LeftDrive.resetRotation();
+    RightDrive.resetRotation();
+    //This code resets the rotation counter in the Motor's built in Quadrature encoder.
+}
+
+void FAuton() {
+    int DriveSpeedRPM = 100;
+    int FlySpeedRPM = 200;
+    
+    FlyWheelRight.spin(directionType::rev, FlySpeedRPM, velocityUnits::rpm);
+    FlyWheelLeft.spin(directionType::rev, FlySpeedRPM, velocityUnits::rpm);
+    task::sleep(3000);
+    
+    BallIntake.spin(vex::directionType::rev, 100, vex::velocityUnits::rpm);
+    task::sleep(2000);
+    
+    LeftDrive.spin(vex::directionType::fwd, DriveSpeedRPM, vex::velocityUnits::rpm);
+    RightDrive.spin(vex::directionType::fwd, DriveSpeedRPM, vex::velocityUnits::rpm);
+    task::sleep(2500);
+    // This code makes both the right and left side of our drive train go at 100 RPM for 2.5 seconds
+    
+    LeftDrive.stop(brakeType::brake);
+    RightDrive.stop(brakeType::brake);
+}
+
+void PSkills() {
+    int DriveSpeedRPM = 100;
+    int FlySpeedRPM = 200;
+    int IntakeSpeedRPM = 100;
+    int LiftSpeedRPM = 100;
+    bool waitForCompletion = true;
+    
+    FlyWheelRight.spin(directionType::rev, FlySpeedRPM, velocityUnits::rpm);
+    FlyWheelLeft.spin(directionType::rev, FlySpeedRPM, velocityUnits::rpm);
+    task::sleep(3000);
+    
+    BallIntake.spin(vex::directionType::rev, IntakeSpeedRPM, vex::velocityUnits::rpm);
+    task::sleep(2000);
+    
+    RightLift.spin(vex::directionType::fwd, LiftSpeedRPM, vex::velocityUnits::rpm);
+    LeftLift.spin(vex::directionType::fwd, LiftSpeedRPM, vex::velocityUnits::rpm);
+    task::sleep(700);
+    
+    RightLift.stop(brakeType::brake);
+    LeftLift.stop(brakeType::brake);
+    
+    BallIntake.stop(brakeType::brake);
+    FlyWheelRight.stop(brakeType::coast);
+    FlyWheelLeft.stop(brakeType::coast);
+    
+    LeftDrive.spin(vex::directionType::fwd, DriveSpeedRPM, vex::velocityUnits::rpm);
+    RightDrive.spin(vex::directionType::fwd, DriveSpeedRPM, vex::velocityUnits::rpm);
+    task::sleep(2700);
+    // This code makes both the right and left side of our drive train go at 100 RPM for 2.5 seconds
+    
+    //SPIN+BACK
+    
+    RightLift.spin(vex::directionType::rev, LiftSpeedRPM, vex::velocityUnits::rpm);
+    LeftLift.spin(vex::directionType::rev, LiftSpeedRPM, vex::velocityUnits::rpm);
+    task::sleep(1000);
+    
+    RightLift.stop(brakeType::brake);
+    LeftLift.stop(brakeType::brake);
     
     LeftDrive.stop(brakeType::brake);
     RightDrive.stop(brakeType::brake);
     
-    LeftLift.spin(vex::directionType::fwd, LiftSpeedRPM, vex::velocityUnits::rpm);
-    RightLift.spin(vex::directionType::fwd, LiftSpeedRPM, vex::velocityUnits::rpm);
-    task::sleep(500);
+    LeftDrive.spin(vex::directionType::rev, DriveSpeedRPM, vex::velocityUnits::rpm);
+    RightDrive.spin(vex::directionType::rev, DriveSpeedRPM, vex::velocityUnits::rpm);
+    task::sleep(2500);
+    // This code makes both the right and left side of our drive train go at 100 RPM for 2.5 seconds
     
-    LeftLift.stop(brakeType::brake);
+    LeftDrive.stop(brakeType::brake);
+    RightDrive.stop(brakeType::brake);
+    
+    LeftDrive.rotateFor(460, rotationUnits::deg, DriveSpeedRPM, velocityUnits::pct, waitForCompletion);
+    RightDrive.rotateFor(-460, rotationUnits::deg, DriveSpeedRPM, velocityUnits::pct, waitForCompletion);
+    //This code rotates the drive train 720 degrees to the left, giving a full 180 degree rotation.
+    
+    LeftDrive.stop(brakeType::brake);
+    RightDrive.stop(brakeType::brake);
+    //This code stops the drive train after the rotation
+    
+    LeftDrive.resetRotation();
+    RightDrive.resetRotation();
+    //This code resets the rotation counter in the Motor's built in Quadrature encoder.
+    
+    LeftDrive.spin(vex::directionType::rev, DriveSpeedRPM, vex::velocityUnits::rpm);
+    RightDrive.spin(vex::directionType::rev, DriveSpeedRPM, vex::velocityUnits::rpm);
+    task::sleep(1750);
+    // This code makes both the right and left side of our drive train go at 100 RPM for 2.5 seconds
+    
+    LeftDrive.stop(brakeType::brake);
+    RightDrive.stop(brakeType::brake);
+    // This code stops all movement in the drive train
+    
+    RightLift.spin(vex::directionType::fwd, LiftSpeedRPM, vex::velocityUnits::rpm);
+    LeftLift.spin(vex::directionType::fwd, LiftSpeedRPM, vex::velocityUnits::rpm);
+    task::sleep(600);
+    
     RightLift.stop(brakeType::brake);
+    LeftLift.stop(brakeType::brake);
+    
+    LeftDrive.rotateFor(-360, rotationUnits::deg, DriveSpeedRPM, velocityUnits::pct, waitForCompletion);
+    RightDrive.rotateFor(360, rotationUnits::deg, DriveSpeedRPM, velocityUnits::pct, waitForCompletion);
+    //This code rotates the drive train 720 degrees to the left, giving a full 180 degree rotation.
+    
+    LeftDrive.stop(brakeType::brake);
+    RightDrive.stop(brakeType::brake);
+    //This code stops the drive train after the rotation
+    
+    LeftDrive.resetRotation();
+    RightDrive.resetRotation();
+    //This code resets the rotation counter in the Motor's built in Quadrature encoder.
 }
 
 void fly() {
+    //Unused function currently
+}
+
+void test() {
+    LeftDrive.spin(vex::directionType::fwd, 100, vex::velocityUnits::rpm);
+    RightDrive.spin(vex::directionType::fwd, 100, vex::velocityUnits::rpm);
+    BallIntake.spin(vex::directionType::rev, 150, vex::velocityUnits::rpm);
+    task::sleep(2500);
     
+    LeftDrive.stop(vex::brakeType::brake);
+    RightDrive.stop(vex::brakeType::brake);
+    task::sleep(1000);
+    
+    BallIntake.spin(vex::directionType::fwd, 150, vex::velocityUnits::rpm);
+    FlyWheelRight.spin(vex::directionType::fwd, 150, vex::velocityUnits::rpm);
+    FlyWheelLeft.spin(vex::directionType::fwd, 150, vex::velocityUnits::rpm);
+    task::sleep(500);
+    
+    BallIntake.stop(vex::brakeType::brake);
+    FlyWheelRight.stop(vex::brakeType::brake);
+    FlyWheelLeft.stop(vex::brakeType::brake);
+    
+    LeftDrive.spin(vex::directionType::rev, 50, vex::velocityUnits::rpm);
+    RightDrive.spin(vex::directionType::rev, 50, vex::velocityUnits::rpm);
+    task::sleep(2500);
+    
+    LeftDrive.stop(vex::brakeType::brake);
+    RightDrive.stop(vex::brakeType::brake);
 }
 
 void usercontrol( void ) {
-    while (1){
+    while (1) { //This line tells all code written between the {} to execute every clock cycle.
         int Dir = 0;
         int LiftSpeedRPM  = 200;
         int BallSpeedPCT  = 50;  
         int FlySpeedRPM   = 400;
         int WheelSpeedPCT = 100;
+        //Variable initialization for motor speeds
         
         LeftDrive.spin(vex::directionType::rev, Controller1.Axis3.value()*WheelSpeedPCT, vex::velocityUnits::pct);
         RightDrive.spin(vex::directionType::rev, Controller1.Axis2.value()*WheelSpeedPCT, vex::velocityUnits::pct);
-        
-        if(Controller1.ButtonUp.pressing()) { //Ball Intake Forward
-			WheelSpeedPCT = 0.75;
-        }
-		else if(Controller1.ButtonDown.pressing()) { //Ball Intake Backward
-			WheelSpeedPCT = 0.25;
-		}
-		else {
-		}
+        //Allows the 2 joysticks to control the left and right drive motors.
         
 		if(Controller1.ButtonL1.pressing()) { //Lift Deploy
-			LeftLift.spin(directionType::fwd, LiftSpeedRPM, velocityUnits::pct);
-			RightLift.spin(directionType::fwd, LiftSpeedRPM, velocityUnits::pct);
+			LeftLift.spin(directionType::fwd, LiftSpeedRPM, velocityUnits::rpm);
+			RightLift.spin(directionType::fwd, LiftSpeedRPM, velocityUnits::rpm);
 		}
 		else if(Controller1.ButtonL2.pressing()) { //Lift Retract
 			LeftLift.spin(directionType::rev, LiftSpeedRPM, velocityUnits::pct);
@@ -85,19 +225,21 @@ void usercontrol( void ) {
 			LeftLift.stop(brakeType::coast);
             RightLift.stop(brakeType::coast);
 		}
+        //The past 10 lines of code allow for the left side top and bottom controller bumpers to control the Lift
         
 		if(Controller1.ButtonR1.pressing()) { //Flywheel Forward
-			RightFly.spin(directionType::rev, FlySpeedRPM, velocityUnits::rpm);
-            LeftFly.spin(directionType::rev, FlySpeedRPM, velocityUnits::rpm);
+			FlyWheelRight.spin(directionType::rev, FlySpeedRPM, velocityUnits::rpm);
+            FlyWheelLeft.spin(directionType::rev, FlySpeedRPM, velocityUnits::rpm);
 		}
 		else if(Controller1.ButtonR2.pressing()) { //Flywheel Backward
-			RightFly.spin(directionType::fwd, FlySpeedRPM, velocityUnits::rpm);
-            LeftFly.spin(directionType::fwd, FlySpeedRPM, velocityUnits::rpm);
+			FlyWheelRight.spin(directionType::fwd, FlySpeedRPM, velocityUnits::rpm);
+            FlyWheelLeft.spin(directionType::fwd, FlySpeedRPM, velocityUnits::rpm);
 		}
 		else {
-			RightFly.stop(brakeType::coast);
-            LeftFly.stop(brakeType::coast);
+			FlyWheelRight.stop(brakeType::coast);
+            FlyWheelLeft.stop(brakeType::coast);
 		}
+        //The past 12 lines of code allow for the right top and bottom controller bumpers to control the Flywheel
         
 		if(Controller1.ButtonX.pressing()) { //Ball Intake Forward
 			BallIntake.spin(directionType::fwd, BallSpeedPCT, velocityUnits::pct);
@@ -108,14 +250,17 @@ void usercontrol( void ) {
 		else {
 			BallIntake.stop(brakeType::brake);
 		}
+        //The past 9 lines of code allow for the X and A buttons to control the up and down motion
+        //of our ball intake.
     }
-    vex::task::sleep(20); 
+    vex::task::sleep(20); //Makes the cortex wait 1/50th of a second between running the previous code.
 }
-
 int main() {
     pre_auton();
-    Competition.drivercontrol(usercontrol);
-    Competition.autonomous(rbautonomous);
+    Competition.drivercontrol(usercontrol); //This tells the cotrex that the function it needs to execute during 
+                                            //the driver control period of the conmpetition
+    Competition.autonomous(PSkills); //These lines tell the cortex which function to run during the autonomous 
+    //Competition.autonomous(rbautonomous); //period. There are 2 so that we can easily switch between the two.
     
     /*
     int Menu = 1;
