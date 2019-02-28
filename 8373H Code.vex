@@ -6,7 +6,7 @@ void pre_auton( void ) {
 
 void rbautonomous(void) {    // Function declaring out Right-Back Autonomous
     int DriveSpeedRPM = 100; //Integer initialization for our Autonomous
-    int LiftSpeedRPM = 100;  //Integer initialization for our Autonomous
+    //int LiftSpeedRPM = 100;  //Integer initialization for our Autonomous
     bool waitForCompletion = true;
     
     LeftDrive.spin(vex::directionType::rev, DriveSpeedRPM, vex::velocityUnits::rpm);
@@ -33,7 +33,7 @@ void rbautonomous(void) {    // Function declaring out Right-Back Autonomous
 
 void lbautonomous(void) {    // Function declaring out Left-Back Autonomous
     int DriveSpeedRPM = 100; //Integer initialization for our Autonomous
-    int LiftSpeedRPM = 100;  //Integer initialization for our Autonomous
+    //int LiftSpeedRPM = 100;  //Integer initialization for our Autonomous
     bool waitForCompletion = true;
     
     LeftDrive.spin(vex::directionType::rev, DriveSpeedRPM, vex::velocityUnits::rpm);
@@ -56,26 +56,6 @@ void lbautonomous(void) {    // Function declaring out Left-Back Autonomous
     LeftDrive.resetRotation();
     RightDrive.resetRotation();
     //This code resets the rotation counter in the Motor's built in Quadrature encoder.
-}
-
-void FAuton() {
-    int DriveSpeedRPM = 100;
-    int FlySpeedRPM = 200;
-    
-    FlyWheelRight.spin(directionType::rev, FlySpeedRPM, velocityUnits::rpm);
-    FlyWheelLeft.spin(directionType::rev, FlySpeedRPM, velocityUnits::rpm);
-    task::sleep(3000);
-    
-    BallIntake.spin(vex::directionType::rev, 100, vex::velocityUnits::rpm);
-    task::sleep(2000);
-    
-    LeftDrive.spin(vex::directionType::fwd, DriveSpeedRPM, vex::velocityUnits::rpm);
-    RightDrive.spin(vex::directionType::fwd, DriveSpeedRPM, vex::velocityUnits::rpm);
-    task::sleep(2500);
-    // This code makes both the right and left side of our drive train go at 100 RPM for 2.5 seconds
-    
-    LeftDrive.stop(brakeType::brake);
-    RightDrive.stop(brakeType::brake);
 }
 
 void PSkills() {
@@ -174,35 +154,120 @@ void fly() {
 }
 
 void test() {
+    // Adapting into our full Skills and front autonomous
+    
     LeftDrive.spin(vex::directionType::fwd, 100, vex::velocityUnits::rpm);
     RightDrive.spin(vex::directionType::fwd, 100, vex::velocityUnits::rpm);
     BallIntake.spin(vex::directionType::rev, 150, vex::velocityUnits::rpm);
     task::sleep(2500);
+    // turns on the drive train and the intake for 2.5 seconds
     
     LeftDrive.stop(vex::brakeType::brake);
     RightDrive.stop(vex::brakeType::brake);
     task::sleep(1000);
+    //Stops the drive train
     
     BallIntake.spin(vex::directionType::fwd, 150, vex::velocityUnits::rpm);
     FlyWheelRight.spin(vex::directionType::fwd, 150, vex::velocityUnits::rpm);
     FlyWheelLeft.spin(vex::directionType::fwd, 150, vex::velocityUnits::rpm);
     task::sleep(500);
+    // This code is used to force balls down the intake system, as they get pushed up durin the beinning
     
     BallIntake.stop(vex::brakeType::brake);
     FlyWheelRight.stop(vex::brakeType::brake);
     FlyWheelLeft.stop(vex::brakeType::brake);
+    // This code stops the force down 0.5 seconds later.
     
     LeftDrive.spin(vex::directionType::rev, 50, vex::velocityUnits::rpm);
     RightDrive.spin(vex::directionType::rev, 50, vex::velocityUnits::rpm);
     task::sleep(2500);
+    // This code drives the robot back for 2.5 seconds to return the robot to the start.
     
     LeftDrive.stop(vex::brakeType::brake);
     RightDrive.stop(vex::brakeType::brake);
+    // This code stops the robot from driving into the wall.
+    
+    LeftDrive.rotateFor(-360, rotationUnits::deg, DriveSpeedRPM, velocityUnits::pct, waitForCompletion);
+    RightDrive.rotateFor(360, rotationUnits::deg, DriveSpeedRPM, velocityUnits::pct, waitForCompletion);
+    //This code rotates the drive train 720 degrees to the left, giving a full 180 degree rotation.
+    
+    LeftDrive.stop(brakeType::brake);
+    RightDrive.stop(brakeType::brake);
+    //This code stops the drive train after the rotation
+    
+    LeftDrive.resetRotation();
+    RightDrive.resetRotation();
+    //This code resets the rotation counter in the Motor's built in Quadrature encoder.
+    
+    LeftDrive.spin(vex::directionType::fwd, 100, vex::velocityUnits::rpm);
+    RightDrive.spin(vex::directionType::fwd, 100, vex::velocityUnits::rpm);
+    FlyWheelRight.spin(vex::directionType::rev, 150, vex::velocityUnits::rpm);
+    FlyWheelLeft.spin(vex::directionType::rev, 150, vex::velocityUnits::rpm);
+    vex::task::sleep(500);
+    // This code toggles the Drive train and the Flywheel for 500 seconds
+    
+    LeftDrive.stop(vex::brakeType::brake);
+    RightDrive.stop(vex::brakeType::brake);
+    vex::task::sleep(1000);
+    // Halts all drive movement and waits 1 second.
+    
+    BallIntake.spin(vex::directionType::fwd, 150, vex::velocityUnits::rpm);
+    vex::task::sleep(250);
+    // Not finished, but will be updated in the next pages.
+    
+    BallIntake.stop(vex::brakeType::brake);
+    vex::task::sleep(500);
+    // Stops the intake from pushing the second ball out
+    
+    LeftDrive.spin(vex::directionType::rev, 100, vex::velocityUnits::rpm);
+    RightDrive.spin(vex::directionType::rev, 100, vex::velocityUnits::rpm);
+    vex::task::sleep(2000);
+    // This code toggles the Drive train and moves it right up to the flags.
+    
+    LeftDrive.stop(vex::brakeType::brake);
+    RightDrive.stop(vex::brakeType::brake);  
+    BallIntake.spin(vex::directionType::fwd, 150, vex::velocityUnits::rpm);
+    vex::task::sleep(500);
+    // Not finished, but will be updated in the next pages.
+    
+    BallIntake.stop(vex::brakeType::brake);
+    FlyWheelRight.stop(vex::brakeType::brake);
+    FlyWheelLeft.stop(vex::brakeType::brake);
+    vex::task::sleep(500);
+    // Stops the flywheel and Ball Intake
+    
+    LeftDrive.spin(vex::directionType::rev, 100, vex::velocityUnits::rpm);
+    RightDrive.spin(vex::directionType::rev, 100, vex::velocityUnits::rpm);
+    vex::task::sleep(1000);
+    // This code toggles the Drive train and moves it right up to the flags.
+    
+    LeftDrive.spin(vex::directionType::fwd, 100, vex::velocityUnits::rpm);
+    RightDrive.spin(vex::directionType::fwd, 100, vex::velocityUnits::rpm);
+    vex::task::sleep(2500);
+    // Moves the robot past the start point
+    
+    LeftDrive.stop(vex::brakeType::brake);
+    RightDrive.stop(vex::brakeType::brake);
+    vex::task::sleep(10);
+    
+    LeftDrive.rotateFor(720, rotationUnits::deg, DriveSpeedRPM, velocityUnits::pct, waitForCompletion);
+    RightDrive.rotateFor(-720, rotationUnits::deg, DriveSpeedRPM, velocityUnits::pct, waitForCompletion);
+    //This code rotates the drive train 720 degrees to the right, giving a full 180 degree rotation.
+    
+    LeftDrive.stop(brakeType::brake);
+    RightDrive.stop(brakeType::brake);
+    //This code stops the drive train after the rotation
+    
+    LeftDrive.resetRotation();
+    RightDrive.resetRotation();
+    //This code resets the rotation counter in the Motor's built in Quadrature encoder.
+    
+    // Not finished, but will be updated in the next pages.
 }
 
 void usercontrol( void ) {
     while (1) { //This line tells all code written between the {} to execute every clock cycle.
-        int Dir = 0;
+        //int Dir = 0;
         int LiftSpeedRPM  = 200;
         int BallSpeedPCT  = 50;  
         int FlySpeedRPM   = 400;
@@ -255,6 +320,7 @@ void usercontrol( void ) {
     }
     vex::task::sleep(20); //Makes the cortex wait 1/50th of a second between running the previous code.
 }
+
 int main() {
     pre_auton();
     Competition.drivercontrol(usercontrol); //This tells the cotrex that the function it needs to execute during 
