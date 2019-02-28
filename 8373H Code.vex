@@ -170,7 +170,7 @@ void test() {
     BallIntake.spin(vex::directionType::fwd, 150, vex::velocityUnits::rpm);
     FlyWheelRight.spin(vex::directionType::fwd, 150, vex::velocityUnits::rpm);
     FlyWheelLeft.spin(vex::directionType::fwd, 150, vex::velocityUnits::rpm);
-    task::sleep(500);
+    task::sleep(250);
     // This code is used to force balls down the intake system, as they get pushed up durin the beinning
     
     BallIntake.stop(vex::brakeType::brake);
@@ -178,17 +178,17 @@ void test() {
     FlyWheelLeft.stop(vex::brakeType::brake);
     // This code stops the force down 0.5 seconds later.
     
-    LeftDrive.spin(vex::directionType::rev, 50, vex::velocityUnits::rpm);
-    RightDrive.spin(vex::directionType::rev, 50, vex::velocityUnits::rpm);
-    task::sleep(2500);
-    // This code drives the robot back for 2.5 seconds to return the robot to the start.
+    LeftDrive.spin(vex::directionType::rev, 100, vex::velocityUnits::rpm);
+    RightDrive.spin(vex::directionType::rev, 100, vex::velocityUnits::rpm);
+    task::sleep(2000);
+    // This code drives the robot back for 2 seconds to return the robot to the start.
     
     LeftDrive.stop(vex::brakeType::brake);
     RightDrive.stop(vex::brakeType::brake);
     // This code stops the robot from driving into the wall.
     
-    LeftDrive.rotateFor(-360, rotationUnits::deg, DriveSpeedRPM, velocityUnits::pct, waitForCompletion);
-    RightDrive.rotateFor(360, rotationUnits::deg, DriveSpeedRPM, velocityUnits::pct, waitForCompletion);
+    LeftDrive.rotateFor(-360, rotationUnits::deg, 100, velocityUnits::pct, true);
+    RightDrive.rotateFor(360, rotationUnits::deg, 100, velocityUnits::pct, true);
     //This code rotates the drive train 720 degrees to the left, giving a full 180 degree rotation.
     
     LeftDrive.stop(brakeType::brake);
@@ -199,8 +199,8 @@ void test() {
     RightDrive.resetRotation();
     //This code resets the rotation counter in the Motor's built in Quadrature encoder.
     
-    LeftDrive.spin(vex::directionType::fwd, 100, vex::velocityUnits::rpm);
-    RightDrive.spin(vex::directionType::fwd, 100, vex::velocityUnits::rpm);
+    LeftDrive.spin(vex::directionType::rev, 100, vex::velocityUnits::rpm);
+    RightDrive.spin(vex::directionType::rev, 100, vex::velocityUnits::rpm);
     FlyWheelRight.spin(vex::directionType::rev, 150, vex::velocityUnits::rpm);
     FlyWheelLeft.spin(vex::directionType::rev, 150, vex::velocityUnits::rpm);
     vex::task::sleep(500);
@@ -211,8 +211,8 @@ void test() {
     vex::task::sleep(1000);
     // Halts all drive movement and waits 1 second.
     
-    BallIntake.spin(vex::directionType::fwd, 150, vex::velocityUnits::rpm);
-    vex::task::sleep(250);
+    BallIntake.spin(vex::directionType::rev, 150, vex::velocityUnits::rpm);
+    vex::task::sleep(350);
     // Not finished, but will be updated in the next pages.
     
     BallIntake.stop(vex::brakeType::brake);
@@ -226,7 +226,7 @@ void test() {
     
     LeftDrive.stop(vex::brakeType::brake);
     RightDrive.stop(vex::brakeType::brake);  
-    BallIntake.spin(vex::directionType::fwd, 150, vex::velocityUnits::rpm);
+    BallIntake.spin(vex::directionType::rev, 150, vex::velocityUnits::rpm);
     vex::task::sleep(500);
     // Not finished, but will be updated in the next pages.
     
@@ -250,8 +250,8 @@ void test() {
     RightDrive.stop(vex::brakeType::brake);
     vex::task::sleep(10);
     
-    LeftDrive.rotateFor(720, rotationUnits::deg, DriveSpeedRPM, velocityUnits::pct, waitForCompletion);
-    RightDrive.rotateFor(-720, rotationUnits::deg, DriveSpeedRPM, velocityUnits::pct, waitForCompletion);
+    LeftDrive.rotateFor(720, rotationUnits::deg, 100, velocityUnits::pct, true);
+    RightDrive.rotateFor(-720, rotationUnits::deg, 100, velocityUnits::pct, true);
     //This code rotates the drive train 720 degrees to the right, giving a full 180 degree rotation.
     
     LeftDrive.stop(brakeType::brake);
@@ -325,7 +325,7 @@ int main() {
     pre_auton();
     Competition.drivercontrol(usercontrol); //This tells the cotrex that the function it needs to execute during 
                                             //the driver control period of the conmpetition
-    Competition.autonomous(PSkills); //These lines tell the cortex which function to run during the autonomous 
+    Competition.autonomous(test); //These lines tell the cortex which function to run during the autonomous 
     //Competition.autonomous(rbautonomous); //period. There are 2 so that we can easily switch between the two.
     
     /*
